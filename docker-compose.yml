@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+  web:
+    container_name: web
+    build:
+      context: .
+    volumes:
+      - .:/usr/src/quasar/web_backend
+    ports:
+      - "9000:9000"
+    tty: true
+    command: "yarn quasar dev"
