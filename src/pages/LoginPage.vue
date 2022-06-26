@@ -24,6 +24,7 @@
 </template>
 <script>
 import { defineComponent, ref } from 'vue';
+import { useRouter } from 'vue-router';
 import InputItem from '../components/form/InputItem.vue';
 import ButtonItem from '../components/form/ButtonItem.vue';
 
@@ -34,6 +35,8 @@ export default defineComponent({
     ButtonItem,
   },
   setup() {
+    const router = useRouter();
+
     // 元件使用資料
     const imgConfig = {
       title: 'Logo',
@@ -88,6 +91,10 @@ export default defineComponent({
     const onSubmit = () => {
       checkInput();
       console.log('🚀 ~ file: LoginPage.vue ~ line 88 ~ onSubmit ~ onSubmit');
+
+      router.replace({
+        name: 'Index',
+      });
     };
 
     // reset event
