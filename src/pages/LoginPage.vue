@@ -14,14 +14,8 @@
           <InputItem v-model:value="iptAccount" :iptConfig="iptAccountConfig" />
           <InputItem v-model:value="iptPassword" :iptConfig="iptPasswordConfig" />
           <div class="col self-center text-center q-pa-md q-gutter-sm">
-            <q-btn no-caps
-              color="primary"
-              :label="btnLoginConfig.label"
-              :type="btnLoginConfig.type" />
-            <q-btn no-caps flat
-              style="color: #1976d2"
-              :label="btnResetConfig.label"
-              :type="btnResetConfig.type" />
+            <ButtonItem no-caps color="primary" :btnConfig="btnLoginConfig" />
+            <ButtonItem no-caps flat style="color: #1976d2" :btnConfig="btnResetConfig" />
           </div>
         </q-form>
       </div>
@@ -31,11 +25,13 @@
 <script>
 import { defineComponent, ref } from 'vue';
 import InputItem from '../components/form/InputItem.vue';
+import ButtonItem from '../components/form/ButtonItem.vue';
 
 export default defineComponent({
   name: 'LoginPage',
   components: {
     InputItem,
+    ButtonItem,
   },
   setup() {
     // 元件使用資料
@@ -80,8 +76,17 @@ export default defineComponent({
       type: 'reset',
     };
 
+    const checkInput = () => {
+      if (iptAccount.value && iptPassword.value) {
+        console.log('confirm...');
+      } else {
+        console.log('empty...');
+      }
+    };
+
     // submit event
     const onSubmit = () => {
+      checkInput();
       console.log('🚀 ~ file: LoginPage.vue ~ line 88 ~ onSubmit ~ onSubmit');
     };
 
@@ -103,6 +108,7 @@ export default defineComponent({
 
       onSubmit,
       onReset,
+      checkInput,
     };
   },
 });
