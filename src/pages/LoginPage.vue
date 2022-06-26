@@ -25,6 +25,7 @@
 <script>
 import { defineComponent, ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { useAuthStore } from 'stores/auth';
 import InputItem from '../components/form/InputItem.vue';
 import ButtonItem from '../components/form/ButtonItem.vue';
 
@@ -36,6 +37,7 @@ export default defineComponent({
   },
   setup() {
     const router = useRouter();
+    const auth = useAuthStore();
 
     // 元件使用資料
     const imgConfig = {
@@ -91,6 +93,8 @@ export default defineComponent({
     const onSubmit = () => {
       checkInput();
       console.log('🚀 ~ file: LoginPage.vue ~ line 88 ~ onSubmit ~ onSubmit');
+
+      auth.setAccount(iptAccount.value);
 
       router.replace({
         name: 'Index',
