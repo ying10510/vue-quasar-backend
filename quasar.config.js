@@ -92,7 +92,8 @@ module.exports = configure((/* ctx */) => ({
 
   // Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#devServer
   devServer: {
-    // https: true
+    https: true, // 只有在dev時有用，之後輸出成網頁還是依照機器的伺服器設定
+    port: 8081, // 設定指定port，遇到相同的port時會自動+1
     open: true, // opens browser window automatically
   },
 

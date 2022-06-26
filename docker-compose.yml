@@ -7,6 +7,6 @@ services:
     volumes:
       - .:/usr/src/quasar/web_backend
     ports:
-      - "9000:9000"
+      - "8081:8081"
     tty: true
     command: "yarn quasar dev"
