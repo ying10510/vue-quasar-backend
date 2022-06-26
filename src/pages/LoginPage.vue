@@ -11,22 +11,8 @@
           @submit="onSubmit"
           @reset="onReset"
         >
-          <q-input
-            v-model="iptAccount"
-            :label="iptAccountConfig.label"
-            lazy-rules
-            :rules="iptAccountConfig.rules"
-            clearable clear-icon="close"
-          />
-
-          <q-input
-            v-model="iptPassword"
-            :type="iptPasswordConfig.type"
-            :label="iptPasswordConfig.label"
-            lazy-rules
-            :rules="iptPasswordConfig.rules"
-            clearable clear-icon="close"
-          />
+          <InputItem v-model:value="iptAccount" :iptConfig="iptAccountConfig" />
+          <InputItem v-model:value="iptPassword" :iptConfig="iptPasswordConfig" />
           <div class="col self-center text-center q-pa-md q-gutter-sm">
             <q-btn no-caps
               color="primary"
@@ -44,8 +30,13 @@
 </template>
 <script>
 import { defineComponent, ref } from 'vue';
+import InputItem from '../components/form/InputItem.vue';
 
 export default defineComponent({
+  name: 'LoginPage',
+  components: {
+    InputItem,
+  },
   setup() {
     // 元件使用資料
     const imgConfig = {
@@ -58,13 +49,14 @@ export default defineComponent({
     };
     const iptAccount = ref(null);
     const iptPassword = ref(null);
-    const confirm = ref(false);
-    const confirmContent = 'confirm_content';
 
     // input account config
     const iptAccountConfig = {
       label: 'Account',
-      rules: [(val) => !!val || 'Please enter your account'],
+      rules: [
+        (val) => !!val || 'Please enter your account',
+        (val) => val.length <= 10 || 'Please use maximum 10 characters',
+      ],
     };
 
     // input password config
@@ -102,8 +94,6 @@ export default defineComponent({
     return {
       iptAccount,
       iptPassword,
-      confirm,
-      confirmContent,
 
       imgConfig,
       iptAccountConfig,
